@@ -7,6 +7,7 @@ import io.netty.channel.epoll.EpollServerSocketChannel
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import ru.capjack.tool.csi.core.server.ConnectionAcceptor
 import ru.capjack.tool.csi.core.server.ConnectionGateway
+import ru.capjack.tool.logging.ownLogger
 import ru.capjack.tool.utils.Closeable
 import java.net.SocketAddress
 

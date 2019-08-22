@@ -1,0 +1,59 @@
+<!doctype html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>tool-csi-transport</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="my-5">
+
+<div class="container">
+	
+	<div class="row my-4">
+		<div class="col-3">
+			<div class="input-group input-group-sm">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Address</span>
+				</div>
+				<input id="address" class="form-control" value="localhost:7777">
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="input-group input-group-sm">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Clients</span>
+				</div>
+				<input id="clients-add-count" class="form-control" type="number" value="1">
+				<div class="input-group-append">
+					<button id="clients-add" class="btn btn-outline-primary">Add</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<table class="table table-sm my-4">
+		<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">State</th>
+			<th scope="col">Messaging ms</th>
+			<th scope="col" style="text-align: right">
+				<button id="disconnect-all" class="btn btn-outline-danger btn-sm">Disconnect all</button>
+			</th>
+		</tr>
+		</thead>
+		<tbody id="clients">
+		</tbody>
+	</table>
+</div>
+
+<script src="js/require.js"></script>
+<script>
+	require.config({baseUrl: 'js', waitSeconds: 0})(['client-js']);
+</script>
+
+</body>
+</html>

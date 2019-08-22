@@ -8,9 +8,10 @@ import org.w3c.dom.events.Event
 import org.w3c.dom.events.EventListener
 import ru.capjack.tool.csi.core.Connection
 import ru.capjack.tool.csi.core.client.ConnectionAcceptor
-import ru.capjack.tool.io.ByteBuffer
+import ru.capjack.tool.io.ArrayByteBuffer
 import ru.capjack.tool.io.InputByteBuffer
-import ru.capjack.tool.io.readToArray
+import ru.capjack.tool.io.asNative
+import ru.capjack.tool.lang.EMPTY_BYTE_ARRAY
 import ru.capjack.tool.lang.EventException
 import ru.capjack.tool.logging.ownLogger
 import ru.capjack.tool.utils.ErrorCatcher
@@ -24,7 +25,7 @@ internal class WebSocketConnection(
 ) : Connection, EventListener {
 	
 	private val handler = acceptor.acceptSuccess(this)
-	private val inputBuffer = ByteBuffer(0)
+	private val inputBuffer = ArrayByteBuffer(0)
 	
 	init {
 		socket.addEventListener("message", this)
@@ -38,28 +39,39 @@ internal class WebSocketConnection(
 	}
 	
 	override fun send(data: Byte) {
-		socket.send(byteArrayOf(data).unsafeCast<Int8Array>())
+		socket.send(byteArrayOf(data).asNative())
 	}
 	
 	override fun send(data: ByteArray) {
 		val size = data.size
-		val array = data.unsafeCast<Int8Array>()
-		if (size <= MAX_FRAME_SIZE) {
-			socket.send(array)
+		val array = data.asNative()
+		if (size > MAX_FRAME_SIZE) {
+			sendFrames(size, 0, array)
 		}
 		else {
-			var offset = 0
-			do {
-				val nextOffset = offset + MAX_FRAME_SIZE
-				socket.send(array.subarray(offset, nextOffset))
-				offset = nextOffset
-			}
-			while (offset < size)
+			socket.send(array)
 		}
 	}
 	
 	override fun send(data: InputByteBuffer) {
-		send(data.readToArray())
+		val size = data.readableSize
+		val arrayView = data.readableArrayView
+		val index = arrayView.readerIndex
+		val array = arrayView.array.asNative()
+		
+		if (size > MAX_FRAME_SIZE) {
+			sendFrames(size, index, array)
+		}
+		else {
+			if (index == 0 && size == array.length) {
+				socket.send(array)
+			}
+			else {
+				socket.send(array.subarray(index, index + size))
+			}
+		}
+		
+		arrayView.commitRead(size)
 	}
 	
 	override fun handleEvent(event: Event) {
@@ -73,13 +85,12 @@ internal class WebSocketConnection(
 	}
 	
 	private fun handleMassage(event: MessageEvent) {
-		val emptyMemory = inputBuffer.memory
-		inputBuffer.memory = Int8Array(event.data.unsafeCast<ArrayBuffer>()).unsafeCast<ByteArray>()
+		inputBuffer.array = Int8Array(event.data.unsafeCast<ArrayBuffer>()).unsafeCast<ByteArray>()
 		try {
 			handler.handleInput(inputBuffer)
 		}
 		finally {
-			inputBuffer.memory = emptyMemory
+			inputBuffer.array = EMPTY_BYTE_ARRAY
 		}
 	}
 	
@@ -99,7 +110,17 @@ internal class WebSocketConnection(
 		socket.removeEventListener("error", this)
 	}
 	
+	private fun sendFrames(size: Int, index: Int, array: Int8Array) {
+		var offset = index
+		do {
+			val nextOffset = (offset + MAX_FRAME_SIZE).coerceAtMost(size)
+			socket.send(array.subarray(offset, nextOffset))
+			offset = nextOffset
+		}
+		while (offset < size)
+	}
+	
 	private companion object {
-		const val MAX_FRAME_SIZE = 32768
+		const val MAX_FRAME_SIZE = 16384
 	}
 }

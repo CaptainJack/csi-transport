@@ -12,13 +12,13 @@ kotlin {
 	sourceSets {
 		get("commonMain").dependencies {
 			implementation(kotlin("stdlib-common"))
-			implementation("io.netty:netty-handler:${project.ext["nettyVersion"]}")
-			implementation("io.netty:netty-codec-http:${project.ext["nettyVersion"]}")
-			implementation("io.netty:netty-transport:${project.ext["nettyVersion"]}")
-			implementation("io.netty:netty-transport-native-epoll:${project.ext["nettyVersion"]}")
-			implementation("ru.capjack.tool:tool-logging:0.14.2")
+			implementation("io.netty:netty-handler")
+			implementation("io.netty:netty-codec-http")
+			implementation("io.netty:netty-transport")
+			implementation("io.netty:netty-transport-native-epoll")
+			implementation("ru.capjack.tool:tool-logging")
 			
-			api("ru.capjack.tool:tool-csi-core-server:${project.ext["csiCoreVersion"]}")
+			api("ru.capjack.tool:tool-csi-core-server")
 		}
 		
 		get("jvmMain").dependencies {

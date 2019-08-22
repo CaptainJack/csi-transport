@@ -4,8 +4,7 @@ import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelOption
 import ru.capjack.tool.csi.core.server.ConnectionAcceptor
-import ru.capjack.tool.logging.ownLogger
-import ru.capjack.tool.utils.Closeable
+import ru.capjack.tool.csi.transport.server.internal.WebSocketChannelInitializer
 import java.net.InetSocketAddress
 import java.net.SocketAddress
 
@@ -14,14 +13,10 @@ class WebSocketConnectionGateway(
 	eventLoopGroups: EventLoopGroups
 ) : NettyConnectionGateway(eventLoopGroups) {
 	
-	override fun open(acceptor: ConnectionAcceptor): Closeable {
-		ownLogger.info("Gateway opening on $address")
-		return super.open(acceptor)
-	}
-	
 	override fun configureOptions(bootstrap: ServerBootstrap) {
 		bootstrap.apply {
 			option(ChannelOption.SO_BACKLOG, 1024)
+			option(ChannelOption.SO_REUSEADDR, true)
 			childOption(ChannelOption.TCP_NODELAY, true)
 			childOption(ChannelOption.SO_KEEPALIVE, true)
 		}

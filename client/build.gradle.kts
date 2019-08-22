@@ -18,9 +18,9 @@ kotlin {
 	sourceSets {
 		get("commonMain").dependencies {
 			implementation(kotlin("stdlib-common"))
-			implementation("ru.capjack.tool:tool-logging:0.14.2")
+			implementation("ru.capjack.tool:tool-logging")
 			
-			api("ru.capjack.tool:tool-csi-core-client:${project.ext["csiCoreVersion"]}")
+			api("ru.capjack.tool:tool-csi-core-client")
 		}
 		
 		get("jvmMain").dependencies {

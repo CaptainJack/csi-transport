@@ -10,15 +10,16 @@ import ru.capjack.tool.utils.ErrorCatcher
 class WebSocketConnectionProducer(
 	private val errorCatcher: ErrorCatcher,
 	address: String,
-	secure: Boolean
+	secure: Boolean,
+	name: String? = null
 ) : ConnectionProducer {
 	
 	private val url = "${secure.make("wss", "ws")}://$address"
-	
+	private val connectionIdPrefix = if (name == null) "" else "$name-"
 	private var connectionCounter = 0
 	
 	override fun produceConnection(acceptor: ConnectionAcceptor) {
-		val id = (++connectionCounter).toString()
+		val id = "$connectionIdPrefix${++connectionCounter}"
 		ownLogger.info("[$id] Connect to $url")
 		try {
 			WebSocketConnectionOpener(id, errorCatcher, acceptor, url)
