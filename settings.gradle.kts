@@ -1,6 +1,7 @@
-rootProject.name = "tool-csi-transport"
+rootProject.name = "csi-transport"
 
 include(
+	"common",
 	"client",
 	"server",
 	"sandbox:client-js",
@@ -8,6 +9,6 @@ include(
 	"sandbox:server"
 )
 
-arrayOf("client", "server").forEach { project(":$it").name = "${rootProject.name}-$it" }
+arrayOf("common", "client", "server").forEach { project(":$it").name = "${rootProject.name}-$it" }
 
 enableFeaturePreview("GRADLE_METADATA")

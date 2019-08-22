@@ -8,7 +8,8 @@ apply {
 
 dependencies {
 	implementation(kotlin("stdlib-js"))
-	implementation(project(":tool-csi-transport-client"))
+	implementation(project(":csi-transport-client"))
+	implementation("ru.capjack.csi:csi-core-client")
 	implementation("ru.capjack.tool:tool-logging")
 	implementation("ru.capjack.tool:tool-utils:0.3.1-dev.0.uncommitted+4ec0dee")
 }

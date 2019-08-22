@@ -7,8 +7,8 @@ plugins {
 
 dependencies {
 	implementation(kotlin("stdlib-jdk8"))
-	implementation(project(":csi-transport-server"))
-	implementation("ru.capjack.csi:csi-core-server")
+	implementation(project(":csi-transport-client"))
+	implementation("ru.capjack.csi:csi-core-client")
 	implementation("ru.capjack.tool:tool-utils")
 	implementation("ru.capjack.tool:tool-logging")
 	implementation("ch.qos.logback:logback-classic:1.2.3")
@@ -16,9 +16,9 @@ dependencies {
 }
 
 tasks.withType<ShadowJar> {
-	manifest.attributes["Main-Class"] = "ru.capjack.csi.transport.sandbox.server.MainKt"
+	manifest.attributes["Main-Class"] = "ru.capjack.tool.csi.transport.sandbox.client.MainKt"
 	
-	archiveBaseName.set("csi-sandbox-server")
+	archiveBaseName.set("csi-sandbox-client")
 	archiveClassifier.set(null as String?)
 	archiveVersion.set(null as String?)
 }

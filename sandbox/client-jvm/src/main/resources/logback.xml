@@ -10,7 +10,7 @@
 	</appender>
 	
 <!--	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>csi-sandbox-server.txt</file>
+		<file>csi-sandbox-client.txt</file>
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} %-5level [%thread] %logger{54}: %msg%n%ex</pattern>
 		</encoder>
@@ -21,6 +21,6 @@
 	</root>
 	
 	<logger name="io.netty" level="INFO"/>
-	<logger name="ru.capjack.csi.core.server" level="DEBUG"/>
+	<logger name="ru.capjack.csi.core" level="INFO"/>
 
 </configuration>
