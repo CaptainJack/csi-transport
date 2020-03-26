@@ -1,1 +1,3 @@
-version = ""
+subprojects {
+	version = ""
+}

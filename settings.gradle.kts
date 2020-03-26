@@ -1,14 +1,20 @@
 rootProject.name = "csi-transport"
 
 include(
-	"common",
-	"client",
-	"server",
-	"sandbox:client-js",
-	"sandbox:client-jvm",
-	"sandbox:server"
+	"netty:common",
+	"netty:client",
+	"netty:server",
+	
+	"js:client-browser",
+	
+	"sandbox:server-netty",
+	"sandbox:client-common",
+	"sandbox:client-netty"
+	
 )
 
-arrayOf("common", "client", "server").forEach { project(":$it").name = "${rootProject.name}-$it" }
-
-enableFeaturePreview("GRADLE_METADATA")
+listOf("netty", "js").forEach { d ->
+	file(d).listFiles { f: File -> f.isDirectory }!!.forEach {
+		project(":$d:${it.name}").name = "${rootProject.name}-$d-${it.name}"
+	}
+}
