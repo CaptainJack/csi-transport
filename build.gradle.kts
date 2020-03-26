@@ -15,7 +15,7 @@ depver {
 		"tool-utils"("0.9.0")
 		"tool-io"("0.6.0")
 	}
-	"ru.capjack.csi:csi-core-*"("0.2.0-dev.5.uncommitted+a71208f")
+	"ru.capjack.csi:csi-core-*"("0.2.0-dev.5+a71208f")
 	"io.netty"("4.1.48.Final")
 }
 
