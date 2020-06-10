@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
-
 plugins {
 	kotlin("multiplatform") version "1.3.71" apply false
 	id("nebula.release") version "14.1.0"
@@ -15,7 +12,7 @@ depver {
 		"tool-utils"("0.9.0")
 		"tool-io"("0.6.1")
 	}
-	"ru.capjack.csi:csi-core-*"("0.2.0")
+	"ru.capjack.csi:csi-core-*"("0.3.0")
 	"io.netty"("4.1.48.Final")
 }
 

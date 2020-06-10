@@ -8,7 +8,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler
 import ru.capjack.csi.core.server.ChannelAcceptor
 
-internal open class WebSocketChannelInitializer(acceptor: ChannelAcceptor) : ChannelInitializer<SocketChannel>() {
+internal class WebSocketChannelInitializer(acceptor: ChannelAcceptor) : ChannelInitializer<SocketChannel>() {
 	
 	private val channelAcceptor = WebSocketChannelAcceptor(acceptor)
 	

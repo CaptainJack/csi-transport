@@ -6,7 +6,7 @@ import ru.capjack.tool.io.InputByteBuffer
 import ru.capjack.tool.io.OutputByteBuffer
 import ru.capjack.tool.io.ensureWriteableArrayView
 
-internal class ByteBufInputByteBuffer : InputByteBuffer, InputByteBuffer.ArrayView {
+class ByteBufInputByteBuffer : InputByteBuffer, InputByteBuffer.ArrayView {
 	private var source: ByteBuf = Unpooled.EMPTY_BUFFER
 	
 	override val readable: Boolean
