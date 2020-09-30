@@ -3,8 +3,13 @@ plugins {
 	id("ru.capjack.bintray")
 }
 
+kotlin {
+	js(IR) {
+		browser()
+	}
+}
+
 dependencies {
-	implementation(kotlin("stdlib-js"))
 	implementation("ru.capjack.tool:tool-lang")
 	implementation("ru.capjack.tool:tool-utils")
 	implementation("ru.capjack.tool:tool-logging")

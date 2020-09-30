@@ -5,12 +5,7 @@ include(
 	"netty:client",
 	"netty:server",
 	
-	"js:client-browser",
-	
-	"sandbox:server-netty",
-	"sandbox:client-common",
-	"sandbox:client-netty"
-	
+	"js:client-browser"
 )
 
 listOf("netty", "js").forEach { d ->

@@ -2,11 +2,10 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
 	kotlin("jvm")
-	id("com.github.johnrengelman.shadow") version "5.2.0"
+	id("com.github.johnrengelman.shadow") version "6.0.0"
 }
 
 dependencies {
-	implementation(kotlin("stdlib-jdk8"))
 	implementation(project(":netty:csi-transport-netty-server"))
 	implementation("ru.capjack.csi:csi-core-server")
 	implementation("ru.capjack.tool:tool-logging")
