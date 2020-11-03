@@ -1,6 +1,6 @@
 plugins {
 	kotlin("multiplatform") version "1.4.10" apply false
-	id("nebula.release") version "15.2.0"
+	id("nebula.release") version "15.3.0"
 	id("ru.capjack.depver") version "1.2.0"
 	id("ru.capjack.bintray") version "1.0.0"
 }
@@ -8,12 +8,12 @@ plugins {
 depver {
 	"ru.capjack.tool" {
 		"tool-lang"("1.5.0")
-		"tool-utils"("0.15.0")
+		"tool-utils"("1.0.0")
 		"tool-io"("0.7.0")
 		"tool-logging"("1.2.0")
 	}
-	"ru.capjack.csi:csi-core-*"("0.5.0-dev.2+41c7bb3")
-	"io.netty"("4.1.52.Final")
+	"ru.capjack.csi:csi-core-*"("0.5.0")
+	"io.netty"("4.1.53.Final")
 }
 
 subprojects {
