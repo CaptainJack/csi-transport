@@ -38,11 +38,11 @@ class ByteBufInputByteBuffer : InputByteBuffer, InputByteBuffer.ArrayView {
 		return source.isReadable(size)
 	}
 	
-	override fun readArray(target: ByteArray, offset: Int, size: Int) {
+	override fun readToArray(target: ByteArray, offset: Int, size: Int) {
 		source.readBytes(target, offset, size)
 	}
 	
-	override fun readBuffer(target: OutputByteBuffer, size: Int) {
+	override fun readToBuffer(target: OutputByteBuffer, size: Int) {
 		if (source.hasArray()) {
 			target.writeArray(source.array(), readerIndex, size)
 			source.skipBytes(size)
