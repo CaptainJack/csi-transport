@@ -7,12 +7,12 @@ plugins {
 
 depver {
 	"ru.capjack.tool" {
-		"tool-lang"("1.6.1")
-		"tool-utils"("1.1.0")
+		"tool-lang"("1.7.0")
+		"tool-utils"("1.1.1")
 		"tool-io"("0.8.0")
 		"tool-logging"("1.2.2")
 	}
-	"ru.capjack.csi:csi-core-*"("0.6.0-dev.1+934567a")
+	"ru.capjack.csi:csi-core-*"("0.6.0")
 	"io.netty"("4.1.54.Final")
 }
 
