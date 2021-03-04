@@ -79,8 +79,6 @@ class ByteBufInputByteBuffer : InputByteBuffer, InputByteBuffer.ArrayView {
 		skipRead(size)
 	}
 	
-	override fun flush() {}
-	
 	fun bindSource(source: ByteBuf) {
 		this.source = source
 	}
