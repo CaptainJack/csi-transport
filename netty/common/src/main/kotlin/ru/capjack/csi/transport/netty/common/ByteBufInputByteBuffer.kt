@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import ru.capjack.tool.io.InputByteBuffer
 import ru.capjack.tool.io.OutputByteBuffer
-import ru.capjack.tool.io.ensureWriteableArrayView
 
 class ByteBufInputByteBuffer : InputByteBuffer, InputByteBuffer.ArrayView {
 	private var source: ByteBuf = Unpooled.EMPTY_BUFFER
@@ -15,7 +14,7 @@ class ByteBufInputByteBuffer : InputByteBuffer, InputByteBuffer.ArrayView {
 	override val readableSize: Int
 		get() = source.readableBytes()
 	
-	override val readableArrayView: InputByteBuffer.ArrayView
+	override val arrayView: InputByteBuffer.ArrayView
 		get() = this
 	
 	override val readerIndex: Int
@@ -48,9 +47,16 @@ class ByteBufInputByteBuffer : InputByteBuffer, InputByteBuffer.ArrayView {
 			source.skipBytes(size)
 		}
 		else {
-			target.ensureWriteableArrayView(size).also {
-				source.readBytes(it.array, it.writerIndex, size)
-				it.commitWrite(size)
+			target.ensureWrite(size)
+			val view = target.arrayView
+			if (view == null) {
+				val array = ByteArray(size)
+				source.readBytes(array, 0, size)
+				target.writeArray(array)
+			}
+			else {
+				source.readBytes(view.array, view.writerIndex, size)
+				target.skipWrite(size)
 			}
 		}
 	}
@@ -73,10 +79,6 @@ class ByteBufInputByteBuffer : InputByteBuffer, InputByteBuffer.ArrayView {
 	
 	override fun backRead(size: Int) {
 		source.readerIndex(source.readerIndex() - size)
-	}
-	
-	override fun commitRead(size: Int) {
-		skipRead(size)
 	}
 	
 	fun bindSource(source: ByteBuf) {

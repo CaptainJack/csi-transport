@@ -5,6 +5,7 @@ import io.netty.channel.ChannelFuture
 import io.netty.util.concurrent.GenericFutureListener
 import ru.capjack.csi.core.Channel
 import ru.capjack.tool.io.InputByteBuffer
+import ru.capjack.tool.io.readArray
 import io.netty.channel.Channel as NettyChannel
 
 class ChannelDelegate(
@@ -53,11 +54,19 @@ class ChannelDelegate(
 	
 	override fun send(data: InputByteBuffer) {
 		val size = data.readableSize
-		val arrayView = data.readableArrayView
-		send(size) {
-			writeBytes(arrayView.array, arrayView.readerIndex, size)
+		val arrayView = data.arrayView
+		if (arrayView == null) {
+			val array = data.readArray(size)
+			send(size) {
+				writeBytes(array, 0, size)
+			}
 		}
-		arrayView.commitRead(size)
+		else {
+			send(size) {
+				writeBytes(arrayView.array, arrayView.readerIndex, size)
+			}
+			data.skipRead(size)
+		}
 	}
 	
 	override fun operationComplete(future: ChannelFuture) {

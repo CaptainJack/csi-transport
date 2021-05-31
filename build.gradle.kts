@@ -1,28 +1,26 @@
 plugins {
-	kotlin("multiplatform") version "1.4.31" apply false
-	id("nebula.release") version "15.3.1"
+	kotlin("multiplatform") version "1.5.10" apply false
+	id("ru.capjack.publisher") version "0.2.0"
 	id("ru.capjack.depver") version "1.2.0"
-	id("ru.capjack.bintray") version "1.0.0"
 }
 
 depver {
 	"ru.capjack.tool" {
-		"tool-lang"("1.8.0")
-		"tool-utils"("1.4.1")
-		"tool-io"("0.10.0")
-		"tool-logging"("1.3.0")
+		"tool-lang"("1.11.1")
+		"tool-utils"("1.6.1")
+		"tool-io"("0.13.0")
+		"tool-logging"("1.5.0")
 	}
-	"ru.capjack.csi:csi-core-*"("0.7.0-SNAPSHOT")
-	"io.netty"("4.1.59.Final")
+	"ru.capjack.csi:csi-core-*"("0.7.+")
+	"io.netty"("4.1.65.Final")
 }
 
 subprojects {
 	group = "ru.capjack.csi"
 	
 	repositories {
-		jcenter()
-		maven("https://dl.bintray.com/capjack/public")
-		mavenLocal()
+		mavenCentral()
+		mavenCapjack()
 	}
 	
 	afterEvaluate {
