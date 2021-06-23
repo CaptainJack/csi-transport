@@ -1,6 +1,6 @@
 plugins {
 	kotlin("multiplatform") version "1.5.10" apply false
-	id("ru.capjack.publisher") version "0.2.0"
+	id("ru.capjack.publisher") version "1.0.0"
 	id("ru.capjack.depver") version "1.2.0"
 }
 
@@ -8,10 +8,10 @@ depver {
 	"ru.capjack.tool" {
 		"tool-lang"("1.11.1")
 		"tool-utils"("1.6.1")
-		"tool-io"("0.13.0")
+		"tool-io"("1.0.0")
 		"tool-logging"("1.5.0")
 	}
-	"ru.capjack.csi:csi-core-*"("0.7.+")
+	"ru.capjack.csi:csi-core-*"("1.0.+")
 	"io.netty"("4.1.65.Final")
 }
 
