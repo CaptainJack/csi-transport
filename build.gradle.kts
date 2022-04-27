@@ -1,18 +1,18 @@
 plugins {
-	kotlin("multiplatform") version "1.5.10" apply false
+	kotlin("multiplatform") version "1.6.21" apply false
 	id("ru.capjack.publisher") version "1.0.0"
 	id("ru.capjack.depver") version "1.2.0"
 }
 
 depver {
 	"ru.capjack.tool" {
-		"tool-lang"("1.11.1")
-		"tool-utils"("1.6.1")
-		"tool-io"("1.0.0")
-		"tool-logging"("1.5.0")
+		"tool-lang"("1.12.0")
+		"tool-logging"("1.6.0")
+		"tool-utils"("1.8.0")
+		"tool-io"("1.1.0")
 	}
-	"ru.capjack.csi:csi-core-*"("1.0.+")
-	"io.netty"("4.1.65.Final")
+	"ru.capjack.csi:csi-core-*"("1.2.+")
+	"io.netty"("4.1.+")
 }
 
 subprojects {
