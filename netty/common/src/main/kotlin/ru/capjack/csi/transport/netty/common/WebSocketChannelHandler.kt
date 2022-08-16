@@ -1,6 +1,5 @@
 package ru.capjack.csi.transport.netty.common
 
-import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame
 import ru.capjack.csi.core.ChannelHandler
