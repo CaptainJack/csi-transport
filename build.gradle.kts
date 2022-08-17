@@ -8,10 +8,10 @@ depver {
 	"ru.capjack.tool" {
 		"tool-lang"("1.13.1")
 		"tool-logging"("1.7.0")
-		"tool-utils"("1.9.0")
+		"tool-utils"("1.10.0")
 		"tool-io"("1.2.0")
 	}
-	"ru.capjack.csi:csi-core-*"("1.3.+")
+	"ru.capjack.csi:csi-core-*"("1.3.0")
 	"io.netty"("4.1.+")
 }
 
